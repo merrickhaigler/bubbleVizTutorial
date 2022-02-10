@@ -11,7 +11,7 @@ var numNodes = 1;
 
 
  
-    
+     
 
 var svg = d3.select("#viz1")
     .append("svg")
