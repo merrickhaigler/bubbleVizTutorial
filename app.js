@@ -30,7 +30,7 @@ var nodes = d3.range(numNodes).map(function(d, i) {
 });
 
 //first simulation run
-simulate(nodes, -10000 , .4);
+simulate(nodes, -1 , .9);
 
 
 
@@ -51,7 +51,7 @@ document.getElementById('Under').onclick = function() {
 
 //show both frozen examples
 document.getElementById('Frozen').onclick = function() {
-	simulate(editCircle(2, 100, 0, "#0A51F6", 0), -1000 , .4)
+	editCircle(1, 100, 2, "#D82E3F", 0)
 }
 
 
@@ -76,7 +76,7 @@ document.getElementById('Input').onclick = function() {
 	RFIDslider.oninput = function() {
   		RFIDoutput = RFIDslider.value * 10;
 		  console.log(RFIDoutput)
-		  editCircleSize(RFIDoutput)
+		  editCircleSize(RFIDoutput, OHoutput)
 
 	}
 
@@ -91,7 +91,7 @@ document.getElementById('Input').onclick = function() {
 	OHslider.oninput = function() {
   		OHoutput = OHslider.value * 10;
 		  console.log(OHoutput)
-		  editCircleSize(OHoutput)
+		  editCircleSize(RFIDoutput, OHoutput)
 
 	}
 
