@@ -64,7 +64,7 @@ document.getElementById('Out').onclick = function() {
 //Letting user change circle sizes
 document.getElementById('Input').onclick = function() {
 	
-	editCircle(1, 50, 0, "#00000", 0)
+	editCircle(2, 50, 0, "#00000", 0)
 
 	//RFID SLIDER
 	var RFIDslider = document.getElementById("RFIDslider");
@@ -77,6 +77,7 @@ document.getElementById('Input').onclick = function() {
   		RFIDoutput = RFIDslider.value * 10;
 		  console.log(RFIDoutput)
 		  editCircleSize(RFIDoutput, OHoutput)
+		  console.log(editCircleSize(RFIDoutput, OHoutput))
 
 	}
 
@@ -92,7 +93,7 @@ document.getElementById('Input').onclick = function() {
   		OHoutput = OHslider.value * 10;
 		  console.log(OHoutput)
 		  editCircleSize(RFIDoutput, OHoutput)
-
+		  console.log(editCircleSize(RFIDoutput, OHoutput))
 	}
 
 }
