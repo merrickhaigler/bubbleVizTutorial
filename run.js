@@ -74,14 +74,9 @@ function editCircle(numNodes, radius, circleColor, strokeColor, strokeWidth){
             }
         });
 
-        svg
-        .append("circle")
-        .attr('r', radius) 
-        .attr("cx", width/2)
-        .attr("cy", height/2)
-        .attr("stroke", strokeColor)
-        .attr("stroke-width", strokeWidth)
-        .style('fill', circleColor);
+        svg.selectAll("circle")
+             .attr("stroke", strokeColor)
+             .attr("stroke-width", strokeWidth)
         
         console.log(nodes)
         return nodes
@@ -95,8 +90,8 @@ function editCircleSize(radius, stroke){
         stroke = 0
     }
     
-    stroke = calculateStroke(stroke, radius) * 10
-    radius = calculateRadius(stroke, radius) * 10
+    stroke = calculateStroke(stroke, radius) * 15
+    radius = calculateRadius(stroke, radius) * 15
 
     
 
@@ -106,8 +101,8 @@ function editCircleSize(radius, stroke){
     .join('circle')
     .attr('r', radius)
     .attr('stroke-width', stroke)
-    .attr('stroke', "#D82E3F")
-    .attr("stroke-opacity", .5);
+    .attr('paint-order',"stroke")
+    .attr('stroke', "#ffffff")
 
         
 	console.log(nodes)

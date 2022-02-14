@@ -11,7 +11,7 @@ var numNodes = 1;
 
 
  
-     
+    
 
 var svg = d3.select("#viz1")
     .append("svg")
@@ -64,7 +64,7 @@ document.getElementById('Out').onclick = function() {
 //Letting user change circle sizes
 document.getElementById('Input').onclick = function() {
 	
-	editCircle(2, 50, 0, "#00000", 0)
+	editCircle(1, 50, 0, "#00000", 0)
 
 	//RFID SLIDER
 	var RFIDslider = document.getElementById("RFIDslider");
@@ -100,7 +100,7 @@ document.getElementById('Input').onclick = function() {
 
 //run simulation with all of nodes
 document.getElementById('store').onclick = function() {
-	numNodes = 100
+	numNodes = 70
 	var nodes = d3.range(numNodes).map(function(d, i) {
 		return {
 			radius: 10 + Math.random() * 20,
