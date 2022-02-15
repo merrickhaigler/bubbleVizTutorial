@@ -9,10 +9,6 @@ var yCenter = [height / 2, height / 2, height / 2, height / 2];
 var numNodes = 1;      
 //var button = 1;
 
-
- 
-    
-
 var svg = d3.select("#viz1")
     .append("svg")
       .attr("width", width)
@@ -41,11 +37,11 @@ document.getElementById('Exact').onclick = function() {
 
 //show overstated example
 document.getElementById('Over').onclick = function() {
-	editCircle(1, 100, 0, "#D82E3F", 20)
+	editCircle(1, 75, 0, "#D82E3F", 50)
 }
 //show understated example
 document.getElementById('Under').onclick = function() {
-	editCircle(1, 100, 0, "#0A51F6", 20)
+	editCircle(1, 75, 0, "#0A51F6", 50)
 	
 }
 
@@ -57,14 +53,14 @@ document.getElementById('Frozen').onclick = function() {
 
 //show out of stock but equal example
 document.getElementById('Out').onclick = function() {
-	editCircle(1, 10, 3, "#00000", 0)
+	editCircle(1, 100, 3, "#00000", 0)
 }
 
 
 //Letting user change circle sizes
 document.getElementById('Input').onclick = function() {
 	
-	editCircle(1, 50, 0, "#00000", 0)
+	editCircle(1, 159.57691216057307, 0, "#00000", 0)
 
 	//RFID SLIDER
 	var RFIDslider = document.getElementById("RFIDslider");
@@ -75,9 +71,7 @@ document.getElementById('Input').onclick = function() {
 	// Update the current slider value (each time you drag the slider handle)
 	RFIDslider.oninput = function() {
   		RFIDoutput = RFIDslider.value * 10;
-		  console.log(RFIDoutput)
 		  editCircleSize(RFIDoutput, OHoutput)
-		  console.log(editCircleSize(RFIDoutput, OHoutput))
 
 	}
 
@@ -93,14 +87,13 @@ document.getElementById('Input').onclick = function() {
   		OHoutput = OHslider.value * 10;
 		  console.log(OHoutput)
 		  editCircleSize(RFIDoutput, OHoutput)
-		  console.log(editCircleSize(RFIDoutput, OHoutput))
 	}
 
 }
 
 //run simulation with all of nodes
 document.getElementById('store').onclick = function() {
-	numNodes = 70
+	numNodes = 50
 	var nodes = d3.range(numNodes).map(function(d, i) {
 		return {
 			radius: 10 + Math.random() * 20,
@@ -110,12 +103,13 @@ document.getElementById('store').onclick = function() {
 		}
 	});
 	console.log(nodes)
-	simulate(nodes, -1 , 0)
+	simulate(nodes, -1, .001)
 	
 	var u = d3.select('svg')
 			.selectAll('circle')
 			.data(nodes)
 			.join('circle')
+			.attr('paint-order',"stroke")
 			.attr("stroke-width", function(d) {
 				return [d.strokeSize];
 			}) 

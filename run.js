@@ -60,6 +60,7 @@ function editCircle(numNodes, radius, circleColor, strokeColor, strokeWidth){
         .attr("cx", width/2)
         .attr("cy", height/2)
         .attr("stroke", strokeColor)
+        .attr('paint-order',"stroke")
         .attr("stroke-width", strokeWidth)
         .style('fill', circleColor);
     
@@ -84,60 +85,92 @@ function editCircle(numNodes, radius, circleColor, strokeColor, strokeWidth){
 }
 
 
-function editCircleSize(radius, stroke){
+function editCircleSize(RFID, OH){
     
-    if(stroke == radius){
-        stroke = 0
+    circleColor = "#00FF7F"
+    strokeColor = "#191414"
+
+
+    //colors stroke based on over/under
+    if(RFID > OH){
+      strokeColor = "#0A51F6"
     }
-    
-    stroke = calculateStroke(stroke, radius) * 15
-    radius = calculateRadius(stroke, radius) * 15
+    else if(OH > RFID){
+      strokeColor = "#D82E3F"
+    }
+
+    //colors circles based on over/under
+
+    if (RFID > 0 & OH == 0){
+      circleColor = "#0A51F6"
+    }
+
+    else if (RFID == 0 & OH > 0){
+      circleColor = "#D82E3F"
+    }
+
+    else if (RFID == 0 & OH == 0){
+      circleColor = "#B1B1B1"
+    }
 
     
+    let stroke = calculateStroke(OH, RFID) * 40
+    let radius = calculateRadius(OH, RFID) * 40
+    console.log(RFID)
+    if(OH == RFID){
+      stroke = 0
+  }
 
     var u = d3.select('svg')
     .selectAll('circle')
     .data(nodes)
     .join('circle')
     .attr('r', radius)
+    .style('fill', circleColor)
     .attr('stroke-width', stroke)
     .attr('paint-order',"stroke")
-    .attr('stroke', "#ffffff")
+    .attr('stroke', strokeColor)
 
         
 	console.log(nodes)
     return nodes
 }
 
+
+
 function calculateRadius(OH, RFID){
 
-    let radius = Math.sqrt( 1 / Math.PI);
+    console.log(OH)
+    console.log(RFID)
 
-    if(OH == 0 &&  RFID == 0){ // accurate out of stock 
-      radius = Math.sqrt(RFID / Math.PI); 
+
+    if(OH > 0 && RFID == 0){
+      
+      radius =  Math.sqrt(OH / Math.PI); 
+      console.log("Radius=" + radius)
+ // frozen out of stock 
     }
-
-    else if(OH > 0 && RFID == 0){
-      radius =  Math.sqrt(OH / Math.PI);  // frozen out of stock 
+    else if(OH == 0 &&  RFID == 0){ // accurate out of stock 
+      radius = 1.7841241161527712; 
     }
     else if(OH == 0 && RFID > 0){
       radius =  Math.sqrt(RFID / Math.PI);  // frozen out of stock 
     }
     else if(OH > RFID){
-      radius =  (Math.sqrt(OH / Math.PI)) + (Math.abs((Math.sqrt(RFID / Math.PI)) - (Math.sqrt(RFID / Math.PI))) /2 ) ; // Overstated 
+      radius =  Math.sqrt(RFID / Math.PI); // Overstated 
     } 
     else if(OH < RFID){
-      radius =  (Math.abs((Math.sqrt(OH / Math.PI)) - (Math.sqrt(RFID / Math.PI))) /2 ) + (Math.sqrt(RFID / Math.PI)); //Understated 
+      radius =  Math.sqrt(OH / Math.PI); //Understated 
     }
     else {
       radius = Math.sqrt(RFID / Math.PI); // Exact Match 
     }
-    console.log(Math.max(radius, Math.sqrt(1 / Math.PI)))
-    return Math.max(radius, Math.sqrt(1 / Math.PI)) ;
+    
+    return radius;
 }
 
 function calculateStroke(OH, RFID){
-    let stroke = 0;
+  
 
     if (OH == RFID) { //Equal
       stroke = 0;
@@ -147,11 +180,11 @@ function calculateStroke(OH, RFID){
       stroke =  0;  
     }
 
+    
     else if(OH != RFID){ // Overstated 
       stroke = Math.abs((Math.sqrt(OH / Math.PI)) - (Math.sqrt(RFID / Math.PI)))
     } 
-    console.log(Math.max(stroke, 0))
-    return Math.max(stroke, 0)  ;
+    return stroke * 2
   }
   
 
