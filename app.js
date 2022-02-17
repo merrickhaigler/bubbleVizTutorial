@@ -71,7 +71,9 @@ document.getElementById('Input').onclick = function() {
 	// Update the current slider value (each time you drag the slider handle)
 	RFIDslider.oninput = function() {
   		RFIDoutput = RFIDslider.value * 10;
-		  editCircleSize(RFIDoutput, OHoutput)
+		editCircleSize(RFIDoutput, OHoutput)
+		OHoutput = OHslider.value * 10;
+		editCircleSize(RFIDoutput, OHoutput)  
 
 	}
 
@@ -85,8 +87,9 @@ document.getElementById('Input').onclick = function() {
 	// Update the current slider value (each time you drag the slider handle)
 	OHslider.oninput = function() {
   		OHoutput = OHslider.value * 10;
-		  console.log(OHoutput)
-		  editCircleSize(RFIDoutput, OHoutput)
+		editCircleSize(RFIDoutput, OHoutput)
+		RFIDoutput = RFIDslider.value * 10;
+		editCircleSize(RFIDoutput, OHoutput)
 	}
 
 }
