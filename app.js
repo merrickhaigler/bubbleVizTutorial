@@ -1,10 +1,10 @@
-var width = window.innerWidth;
-var height = window.innerHeight - 100;
+var width = window.innerWidth - 600;
+var height = window.innerHeight -100;
 
 
 var colorScale = ['#00FF7F', '#0A51F6', '#D82E3F', '#B1B1B1'];
 var strokeScale =  ['#00FF7F','#0A51F6', '#D82E3F'];
-var xCenter = [width / 2, width / 2, width / 2, width / 2];
+var xCenter = [width / 3, width / 3, width / 3, width / 3];
 var yCenter = [height / 2, height / 2, height / 2, height / 2];
 var numNodes = 1;      
 //var button = 1;
