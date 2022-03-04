@@ -59,7 +59,7 @@ document.getElementById('Out').onclick = function() {
 
 //Letting user change circle sizes
 document.getElementById('Input').onclick = function() {
-	
+
 	editCircle(1, 159.57691216057307, 0, "#00000", 0)
 
 	//RFID SLIDER
@@ -73,7 +73,7 @@ document.getElementById('Input').onclick = function() {
   		RFIDoutput = RFIDslider.value * 10;
 		editCircleSize(RFIDoutput, OHoutput)
 		OHoutput = OHslider.value * 10;
-		editCircleSize(RFIDoutput, OHoutput)  
+		editCircleSize(RFIDoutput, OHoutput)
 
 	}
 
@@ -95,7 +95,7 @@ document.getElementById('Input').onclick = function() {
 }
 
 //run simulation with all of nodes
-document.getElementById('store').onclick = function() {
+document.getElementById('Store').onclick = function() {
 	numNodes = 50
 	var nodes = d3.range(numNodes).map(function(d, i) {
 		return {
@@ -121,5 +121,4 @@ document.getElementById('store').onclick = function() {
 			})
 
 }
-
 

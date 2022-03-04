@@ -6,77 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .column {
-            float: left;
-        }
-
-        /* Set width length for the left, right and middle columns */
-        .left {
-            width: 60%;
-            height: 100vh;;
-        }
-
-        .right {
-            width: 40%;
-            height: 100vh;
-        }
-
-    </style>
     <title>Tutorial</title>
 </head>
 
 <body>
-    <body style="background-color: #191414;">
+    <body style="background-color: #000000;">
 
 <!-- columns -->
     <div class="row">
         <div class="column left" style="background-color: #191414">
              <!-- buttons -->
-            <input id="Exact" type="submit" name="Exact" value="Exact"/>
-            <input id="Over" type="submit" name="Over" value="Over"/>
-            <input id="Under" type="submit" name="Under" value="Under"/>
-            <input id="Frozen" type="submit" name="Frozen" value="Frozen"/>
-            <input id="Out" type="submit" name="Out" value="Out"/>
-            <input id="Input" type="submit" name="Input" value="Input"/>
-            <input id="store" type="submit" name="store" value="store"/>
+            <input class="button" id="Exact" type="submit" name="Exact" value="Exact"/>
+            <input class="button" id="Over" type="submit" name="Over" value="Over"/>
+            <input class="button" id="Under" type="submit" name="Under" value="Under"/>
+            <input class="button" id="Frozen" type="submit" name="Frozen" value="Frozen"/>
+            <input class="button" id="Out" type="submit" name="Out" value="Out"/>
+            <input class="button" id="Input" type="submit" name="Input" value="Input"/>
+            <input class="button" id="Store" type="submit" name="Store" value="Store"/>
 
             <div id= 'viz1'></div>
         </div>
         
         <div class="column right" style="background-color:#191414;">
-            
-            <div class="slidecontainer">
-                
-                <div class = 'p1'>
-                    <input type="range" min="0" max="9" value="5" class="slider1" id="RFIDslider" oninput="document.getElementById('RFID').innerHTML = this.value">
-
-                    <label for="RFIDslider">RFID </label>
-                </div>
-                    
-
-                <p ></p>
-
-                <div class = 'p1'>
-                    <input type="range" min="0" max="9" value="5" class="slider2" id="OHslider">
-                    <label for="OHslider">OH</label>
-                </div>
-                
-
+            <div class = 'p1'>
+                <input type="range" min="0" max="9" value="5" class="slider" id="RFIDslider" oninput="RFIDamount.value=RFIDslider.value">
+                <label for="RFIDslider">RFID: </label>
+                <output name="RFIDamount" id="RFIDamount" for="RFIDslider">5</output>
+                <p></p>
+                <input type="range" min="0" max="9" value="5" class="slider" id="OHslider" oninput="OHamount.value=OHslider.value">
+                <label for="OHslider">On-Hand: </label>
+                <output name="OHamount" id="OHamount" for="OHslider">5</output>
             </div>
         </div>
-    </div>
-
-   
-     
-    
-    <!-- <div id= 'viz1'></div> -->
-    
- 
-
-    <body style="background-color: #191414;">
-   
-        
+    </div>   
 </body>
 
 
