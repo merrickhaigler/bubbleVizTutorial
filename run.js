@@ -5,7 +5,7 @@ function simulate(nodes, strength, y){
         .alphaDecay(.1)
         .force('charge', d3.forceManyBody().strength(strength))
         .force('y', d3.forceY().strength(y))
-        .force('center', d3.forceCenter(width / 2, height / 2))
+        .force('center', d3.forceCenter(width / 1.65, height / 2.3))
         .force('collision', d3.forceCollide().radius(function(d) {
 			return d.radius + 5;
 		}))
@@ -57,8 +57,8 @@ function editCircle(numNodes, radius, circleColor, strokeColor, strokeWidth){
         svg
         .append("circle")
         .attr('r', radius) 
-        .attr("cx", width/2)
-        .attr("cy", height/2)
+        .attr("cx", width / 1.65)
+        .attr("cy", height /  2.3)
         .attr("stroke", strokeColor)
         .attr('paint-order',"stroke")
         .attr("stroke-width", strokeWidth)
@@ -198,4 +198,68 @@ function calculateStroke(OH, RFID){
     return  Math.max(calculateRadius(OH, RFID) - calculateStroke(OH,RFID) / 2, 0);
   }
 
- 
+ function editText(text){
+   if(text == 'Exact'){
+     text = "Exact Match happens when the RFID count and On-Hand count are equal. In simpler terms: When a store's inventory system is displaying the correct amount of actual units in store. This is shown by a completely greeen circle. There is perfect overlap between the two records. The circle size depends on how many units of the SKU are accounted for."
+   }
+     
+   else if(text == 'Over'){
+    text = "When the count of On-Hands exceeds the count that is captured by RFID for a particular SKU, this is called Overstated. In simpler terms: When a store's inventory system claims more units than they actually have. The green in the circle still represents the amount of units that overlap, but the red is the amount that the store has overstated."
+   }
+
+   else if(text == 'Under'){
+    text = "When the count of RFID exceeds the On-Hand count for a particular SKU. In simpler terms: When a store has more units than their inventory system claims. The green in the circle still represents the amount of units that overlap, but the blue is the amount that the store has understated."
+   }
+
+   else if(text == 'Frozen'){
+    text = "Frozen Out-Of-Stock is when a SKU has an On-Hand count greater than 0, but the RFID count shows 0. In simpler terms: When a store's inventory system displays units in-stock, but there are no units in the store. Such a case can prevent replenishment or additional sales. This is shown with a completely red circle and these SKU's are the ones that need the most attention."
+   }
+
+   else if(text == 'Out'){
+    text = "Out-of-Stock SKU's are exaclty what they sound like, Out-of-Stock. The RFID count and the On Hand count are equal, but both are reporting that the are 0 units in stock. These SKU's are not wrong, but they are unable to be purchased. They are represented as grey circles."
+   }
+
+   else if(text == 'Input'){
+    text = "Now you have the opportunity to manipulate the SKU. The top slider is the RFID count and the bottom slider is the On Hand count. Drag each slider back and forth for a better understading of how the SKU is effected under different cirumstances."
+   }
+
+   else if(text == 'Store'){
+    text = "Here we see a mock store of 100 SKU's. "
+   }
+   
+
+   return text;
+ }
+
+ function wrap(text, width) {
+  text.each(function () {
+      var text = d3.select(this),
+          words = text.text().split(/\s+/).reverse(),
+          word,
+          line = [],
+          lineNumber = 0,
+          lineHeight = 1.1, // ems
+          x = text.attr("x"),
+          y = text.attr("y"),
+          dy = 0, //parseFloat(text.attr("dy")),
+          tspan = text.text(null)
+                      .append("tspan")
+                      .attr("x", x)
+                      .attr("y", y)
+                      .attr("dy", dy + "em");
+      while (word = words.pop()) {
+          line.push(word);
+          tspan.text(line.join(" "));
+          if (tspan.node().getComputedTextLength() > width) {
+              line.pop();
+              tspan.text(line.join(" "));
+              line = [word];
+              tspan = text.append("tspan")
+                          .attr("x", x)
+                          .attr("y", y)
+                          .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                          .text(word);
+          }
+      }
+  });
+}

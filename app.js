@@ -1,19 +1,48 @@
-var width = window.innerWidth - 600;
-var height = window.innerHeight -100;
+var width = window.innerWidth  ;
+var height = window.innerHeight / 2 + 100;
 
 
 var colorScale = ['#00FF7F', '#0A51F6', '#D82E3F', '#B1B1B1'];
 var strokeScale =  ['#00FF7F','#0A51F6', '#D82E3F'];
-var xCenter = [width / 3, width / 3, width / 3, width / 3];
-var yCenter = [height / 2, height / 2, height / 2, height / 2];
 var numNodes = 1;      
 //var button = 1;
+
+
 
 var svg = d3.select("#viz1")
     .append("svg")
       .attr("width", width)
       .attr("height", height)
-      .style("background-color", "#191414")
+      .style("background-color", "#00000")
+
+
+var rectangle = d3.select("#rect").append("svg").attr("width", 800).attr("height", 200)
+
+svg.append('rect')
+  .attr('x', 214)
+  .attr('y', 80)
+  .attr('rx', 8)
+  .attr('ry', 8)
+  .attr('width', 539)
+  .attr("align","center")
+  .attr('height', 400)
+  .attr('stroke', 'black')
+  .attr('fill', '#6f6f6f');
+
+
+  var text = d3.select("#text").append("svg").attr("width", 800).attr("height", 200)
+
+svg.append('text')
+	.attr('x', 230)
+	.attr('y', 120)
+	.style("text-anchor", "center")
+	.attr('stroke', 'white')
+	.attr('fill', 'white')
+	.text(editText('Exact'))
+	.attr('dy', 25)
+	.style("font-size", "34px")
+	.style("font-family", "arial")
+	.call(wrap, 520)
 
 //first circle being created
 var nodes = d3.range(numNodes).map(function(d, i) {
@@ -32,28 +61,99 @@ simulate(nodes, -1 , .9);
 
 ////show equal example
 document.getElementById('Exact').onclick = function() {
+	
 	editCircle(1, 100, 0, "#00000", 0)	
+
+	svg.select('text').remove()
+
+	svg.append('text')
+	.attr('x', 230)
+	.attr('y', 120)
+	.style("text-anchor", "center")
+	.attr('stroke', 'white')
+	.attr('fill', 'white')
+	.text(editText('Exact'))
+	.attr('dy', 25)
+	.style("font-size", "34px")
+	.style("font-family", "arial")
+	.call(wrap, 520)
 }
 
 //show overstated example
 document.getElementById('Over').onclick = function() {
 	editCircle(1, 75, 0, "#D82E3F", 50)
+
+	svg.select('text').remove()
+
+	svg.append('text')
+	.attr('x', 230)
+	.attr('y', 120)
+	.style("text-anchor", "center")
+	.attr('stroke', 'white')
+	.attr('fill', 'white')
+	.text(editText('Over'))
+	.attr('dy', 25)
+	.style("font-size", "34px")
+	.style("font-family", "arial")
+	.call(wrap, 520)
 }
 //show understated example
 document.getElementById('Under').onclick = function() {
 	editCircle(1, 75, 0, "#0A51F6", 50)
+
+	svg.selectAll('text').remove()
+
+	svg.append('text')
+	.attr('x', 230)
+	.attr('y', 120)
+	.style("text-anchor", "center")
+	.attr('stroke', 'white')
+	.attr('fill', 'white')
+	.text(editText('Under'))
+	.attr('dy', 25)
+	.style("font-size", "34px")
+	.style("font-family", "arial")
+	.call(wrap, 520)
 	
 }
 
 //show both frozen examples
 document.getElementById('Frozen').onclick = function() {
 	editCircle(1, 100, 2, "#D82E3F", 0)
+	
+	svg.selectAll('text').remove()
+
+	svg.append('text')
+	.attr('x', 230)
+	.attr('y', 120)
+	.style("text-anchor", "center")
+	.attr('stroke', 'white')
+	.attr('fill', 'white')
+	.text(editText('Frozen'))
+	.attr('dy', 25)
+	.style("font-size", "34px")
+	.style("font-family", "arial")
+	.call(wrap, 520)
 }
 
 
 //show out of stock but equal example
 document.getElementById('Out').onclick = function() {
 	editCircle(1, 100, 3, "#00000", 0)
+
+	svg.selectAll('text').remove()
+
+	svg.append('text')
+	.attr('x', 230)
+	.attr('y', 120)
+	.style("text-anchor", "center")
+	.attr('stroke', 'white')
+	.attr('fill', 'white')
+	.text(editText('Out'))
+	.attr('dy', 25)
+	.style("font-size", "34px")
+	.style("font-family", "arial")
+	.call(wrap, 520)
 }
 
 
@@ -61,6 +161,20 @@ document.getElementById('Out').onclick = function() {
 document.getElementById('Input').onclick = function() {
 
 	editCircle(1, 159.57691216057307, 0, "#00000", 0)
+
+	svg.selectAll('text').remove()
+
+	svg.append('text')
+	.attr('x', 230)
+	.attr('y', 120)
+	.style("text-anchor", "center")
+	.attr('stroke', 'white')
+	.attr('fill', 'white')
+	.text(editText('Input'))
+	.attr('dy', 25)
+	.style("font-size", "34px")
+	.style("font-family", "arial")
+	.call(wrap, 520)
 
 	//RFID SLIDER
 	var RFIDslider = document.getElementById("RFIDslider");
@@ -74,7 +188,7 @@ document.getElementById('Input').onclick = function() {
 		editCircleSize(RFIDoutput, OHoutput)
 		OHoutput = OHslider.value * 10;
 		editCircleSize(RFIDoutput, OHoutput)
-
+		
 	}
 
 
@@ -96,17 +210,32 @@ document.getElementById('Input').onclick = function() {
 
 //run simulation with all of nodes
 document.getElementById('Store').onclick = function() {
-	numNodes = 50
+
+	svg.selectAll('text').remove()
+
+	svg.append('text')
+	.attr('x', 230)
+	.attr('y', 120)
+	.style("text-anchor", "center")
+	.attr('stroke', 'white')
+	.attr('fill', 'white')
+	.text(editText('Store'))
+	.attr('dy', 25)
+	.style("font-size", "34px")
+	.style("font-family", "arial")
+	.call(wrap, 530) 
+	
+	numNodes = 100
 	var nodes = d3.range(numNodes).map(function(d, i) {
 		return {
-			radius: 10 + Math.random() * 20,
+			radius: 5 + Math.random() * 20,
 			category: 0,
 			stroke: i % 3,
 			strokeSize: Math.random() * 10
 		}
 	});
 	console.log(nodes)
-	simulate(nodes, -1, .001)
+	simulate(nodes, -1, .001, 5, 1)
 	
 	var u = d3.select('svg')
 			.selectAll('circle')
@@ -119,6 +248,7 @@ document.getElementById('Store').onclick = function() {
 			.attr("stroke",function(d) {
 				return strokeScale[d.stroke];
 			})
+			
 
 }
 

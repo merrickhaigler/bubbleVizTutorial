@@ -9,25 +9,27 @@
     <title>Tutorial</title>
 </head>
 
+<!-- <style>
+    row{
+        height: 100px;
+    }
+</style> -->
 <body>
     <body style="background-color: #000000;">
-
 <!-- columns -->
-    <div class="row">
-        <div class="column left" style="background-color: #191414">
+    <div class="topRow">
+        <div class="column topLeft" style="background-color: #000000">
              <!-- buttons -->
-            <input class="button" id="Exact" type="submit" name="Exact" value="Exact"/>
+            <input class="buttonRight" id="Exact" type="submit" name="Exact" value="Exact"/>
             <input class="button" id="Over" type="submit" name="Over" value="Over"/>
             <input class="button" id="Under" type="submit" name="Under" value="Under"/>
-            <input class="button" id="Frozen" type="submit" name="Frozen" value="Frozen"/>
+            <input class="buttonRight" id="Frozen" type="submit" name="Frozen" value="Frozen"/>
             <input class="button" id="Out" type="submit" name="Out" value="Out"/>
             <input class="button" id="Input" type="submit" name="Input" value="Input"/>
-            <input class="button" id="Store" type="submit" name="Store" value="Store"/>
-
-            <div id= 'viz1'></div>
+            <input class="button2" id="Store" type="submit" name="Store" value="Store"/>
         </div>
         
-        <div class="column right" style="background-color:#191414;">
+        <div class="column topRight" style="background-color:#000000;">
             <div class = 'p1'>
                 <input type="range" min="0" max="9" value="5" class="slider" id="RFIDslider" oninput="RFIDamount.value=RFIDslider.value">
                 <label for="RFIDslider">RFID: </label>
@@ -38,7 +40,16 @@
                 <output name="OHamount" id="OHamount" for="OHslider">5</output>
             </div>
         </div>
-    </div>   
+        
+    </div>
+    
+    <div class="bottomRow">
+        <div class="column bottom" style="background-color: #000000">
+            <div id= 'viz1' style="width: 55%;"></div>
+            <div id= 'rect'></div>
+            <div id = 'text'></div>
+        </div>
+    </div>
 </body>
 
 
