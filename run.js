@@ -7,7 +7,7 @@ function simulate(nodes, strength, y){
         .force('y', d3.forceY().strength(y))
         .force('center', d3.forceCenter(width / 1.65, height / 2.3))
         .force('collision', d3.forceCollide().radius(function(d) {
-			return d.radius + 5;
+			return (d.radius + d.stroke) *1.3;
 		}))
         .on('tick', ticked);
         
@@ -199,8 +199,8 @@ function calculateStroke(OH, RFID){
   }
 
  function editText(text){
-   if(text == 'Exact'){
-     text = "Exact Match happens when the RFID count and On-Hand count are equal. In simpler terms: When a store's inventory system is displaying the correct amount of actual units in store. This is shown by a completely greeen circle. There is perfect overlap between the two records. The circle size depends on how many units of the SKU are accounted for."
+   if(text == 'Match'){
+     text = "A Match occurs when the RFID count and On-Hand count are equal. In simpler terms: When a store's inventory system is displaying the correct amount of actual units in store. This is shown by a completely greeen circle. There is perfect overlap between the two records. The circle size depends on how many units of the SKU are accounted for."
    }
      
    else if(text == 'Over'){
@@ -212,7 +212,7 @@ function calculateStroke(OH, RFID){
    }
 
    else if(text == 'Frozen'){
-    text = "Frozen Out-Of-Stock is when a SKU has an On-Hand count greater than 0, but the RFID count shows 0. In simpler terms: When a store's inventory system displays units in-stock, but there are no units in the store. Such a case can prevent replenishment or additional sales. This is shown with a completely red circle and these SKU's are the ones that need the most attention."
+    text = "Frozen Out-Of-Stock is when a SKU has an On-Hand count greater than 0, but the RFID count shows 0. In simpler terms: When a store's inventory system displays units in-stock, but there are no units in the store. Such a case can prevent replenishment or additional sales. This is shown with a completely red circle."
    }
 
    else if(text == 'Out'){
@@ -224,7 +224,7 @@ function calculateStroke(OH, RFID){
    }
 
    else if(text == 'Store'){
-    text = "Here we see a mock store of 100 SKU's. "
+    text = "Here we see a mock store of 100 SKU's. Regardless of the metric being used to measure the accuracy, this chart displays the health of the store. Your attention should be drawn to everywhere that is not green, this is where the rrrror lies." 
    }
    
 

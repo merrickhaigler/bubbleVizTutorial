@@ -25,7 +25,7 @@ svg.append('rect')
   .attr('ry', 8)
   .attr('width', 539)
   .attr("align","center")
-  .attr('height', 400)
+  .attr('height', 425)
   .attr('stroke', 'black')
   .attr('fill', '#6f6f6f');
 
@@ -38,7 +38,7 @@ svg.append('text')
 	.style("text-anchor", "center")
 	.attr('stroke', 'white')
 	.attr('fill', 'white')
-	.text(editText('Exact'))
+	.text(editText('Match'))
 	.attr('dy', 25)
 	.style("font-size", "34px")
 	.style("font-family", "arial")
@@ -60,7 +60,7 @@ simulate(nodes, -1 , .9);
 
 
 ////show equal example
-document.getElementById('Exact').onclick = function() {
+document.getElementById('Match').onclick = function() {
 	
 	editCircle(1, 100, 0, "#00000", 0)	
 
@@ -228,14 +228,14 @@ document.getElementById('Store').onclick = function() {
 	numNodes = 100
 	var nodes = d3.range(numNodes).map(function(d, i) {
 		return {
-			radius: 5 + Math.random() * 20,
+			radius: 5 + Math.random() * 15,
 			category: 0,
 			stroke: i % 3,
-			strokeSize: Math.random() * 10
+			strokeSize: Math.random() * 14
 		}
 	});
 	console.log(nodes)
-	simulate(nodes, -1, .001, 5, 1)
+	simulate(nodes, -1, .001)
 	
 	var u = d3.select('svg')
 			.selectAll('circle')
